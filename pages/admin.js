@@ -13,12 +13,12 @@ export default function Admin() {
 
     return(
         <AdminLayout pagina={"Admin"}>
-            <h1 className="text-4xl font-black">Panel de administracion</h1>
+            <h1 className="text-4xl font-black">Ordenes en proceso</h1>
             <p className="text-2xl my-10">Administra tus ordenes</p>
 
 
             {data && data.length ? data.map(orden => (
-                <Orden key={orden.id} orden={orden}/>
+                (!orden.estado && <Orden key={orden.id} orden={orden}/>)
             )) : <p>No hay ordenes pendientes</p>}
         </AdminLayout>
     )

@@ -7,9 +7,6 @@ export default async function hendler(req, res) {
     //Obtener ordenes
 
     const ordenes = await prisma.orden.findMany({
-        where: {
-            estado:false
-        }
     })
     res.status(200).json(ordenes)
 
@@ -28,4 +25,12 @@ export default async function hendler(req, res) {
 
         res.json(orden)
     }
+
+
+    //Eliminar ordenes
+    if(req.method === "DELETE") {
+        const eliminarOrden = await prisma.orden.deleteMany()
+        res.json(eliminarOrden)
+    }
+    
 }

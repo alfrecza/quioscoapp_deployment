@@ -5,7 +5,7 @@ import {toast} from "react-toastify"
 
 const Orden = ({orden}) => {
 
-  const {id, nombre, total, pedido} = orden
+  const {id, nombre, total, pedido, estado} = orden
 
   const completarOrden = async () => {
     try {
@@ -33,11 +33,12 @@ const Orden = ({orden}) => {
                 </div>
             ))}
         </div>
-        <div className="flex :items-center md:justify-between my-10">
+        <div className={`flex :items-center md:justify-between my-10`}>
             <p className="mt-5 font-black text-4xl text-amber-500">
-                Total a pagar: {formatearDinero(total)}
+                {!orden.estado ? `Total a pagar: ${formatearDinero(total)}` : `Se cobró: ${formatearDinero(total)}`}
+                
             </p>
-            <button className="bg-indigo-600 hover:bg-indigo-800 text-white mt-5 md:mt-0 py-3 px-10 uppercase font-bold rounded-lg" type="button" onClick={completarOrden}>Completar Orden</button>
+            <button className={`bg-indigo-600 hover:bg-indigo-800 text-white mt-5 md:mt-0 py-3 px-10 uppercase font-bold rounded-lg ${orden.estado && "hidden"}`} type="button" onClick={completarOrden}>Completar Orden</button>
         </div>
     </div>  
   )
